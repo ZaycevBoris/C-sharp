@@ -24,16 +24,11 @@ namespace Collections
         static void Main(string[] args)
         {
             List<Employee> workers = new List<Employee>();
-            workers.Add(new Employee { Name = "Oleg", surname = "Olegov", patronymic = "Olegovich", age = 23, dep = { name = "s", director = "Gleb", number = 1} });
+            workers.Add(new Employee { Name = "Oleg", surname = "Olegov", patronymic = "Olegovich", age = 23, dep = { name = "s", director = "Gleb", number = 1 } });
             workers.Add(new Employee { Name = "petr", surname = "Petrov", patronymic = "Petrovich", age = 32, dep = { name = "rock1", director = "Nikita", number = 2 } });
 
-            var workersGroups = from Employee in workers
-                              group Employee by Employee.dep.name;
-            Dictionary<string, IGrouping<string, Employee>> slv =
-            workersGroups.ToDictionary(p => p.Key);
-
+            workers.GroupBy(x => x.dep.name).ToDictionary(x => x.Key, x => x.ToList());
         }
-     }
-
+    }
 }
 
